@@ -1,0 +1,28 @@
+.sb401SearchBar{
+  width:500px;
+  height:45px;
+  box-shadow: var(--searchbar-shw);
+  border-radius:5px;
+  border:none;
+  outline:none;
+  position: relative;
+  padding-left:55px;
+  padding-top:16px;
+ }
+ 
+ .sb401SearchBar input{
+   height:2rem;
+   left:9rem;
+   width:85%;
+   font-size:16px ;
+   border:none;
+   outline:none;
+   background-color:var(--searhbar-input-bkgrnd);
+ }
+  
+ .sb411fontawesomeicon{
+  color: var(--searchbar-fonticon);
+  left: 0.4rem;
+  position: absolute;
+  top: 1rem;
+ }

@@ -1,0 +1,18 @@
+.nc501NotifiSlotContainer{
+  display: flex;   
+  flex-direction: column;
+  font-size: 13px;
+  color:var(--notifi-content-txt);
+  background:var( --notifi-content-box);
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  width:100%;
+  font-weight: 600;
+}
+
+.nc512TimeDiff{
+  color:var(--notifi-time-diff);
+  font-size: 12px;
+  font-weight: 900;
+}

@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+:root{
+  --india-color:blue;
+  --state-color:blue;
+  --covid-color-state:black;
+  
+  --notifi-bell:#6c757d;
+  --notifi-bell-hov:#007bff;
+  --datetime-color:#6c757d;
+
+  --scroll-bar-border:rgb(203, 228, 228);
+  --scroll-bar-box-shw:inset 0 0 2px grey; 
+
+  --notifi-date:#4c75f2;
+  
+  --notifi-content-txt:#6c757d;
+  --notifi-content-box:rgba(114, 123, 131, 0.063);
+  --notifi-time-diff:rgba(108,117,125,0.6);
+  --notifi-box-shw: 5px 5px 2px #518f8f;
+  --notifi-bkgrnd: #eaffff;
+
+  --scroll-bar:#eaffff;
+  --scroll-thb:#babac0;
+  --scroll-thb-brdr:2px solid rgb(255, 244, 244);
+
+  --searchbar-shw:0 10px 35px rgb(0 0 0 / 10%);
+  --searhbar-input-bkgrnd:white;
+  --searchbar-fonticon:rgba(4, 18, 31, 0.6);
+
+  --dropdown-sugg-bkgrnd-color:white;
+  --dropdown-sugg-bkgrnd-shw:0 10px 35px rgb(0 0 0 / 3%);
+  --dropdown-sugg-bkgrnd-hov:rgba(0,123,255,.0627451);
+  --dropdown-link-color:#6c757d;
+
+  --cardtested:#3b4e2d;
+  --cardconfirmed:#e2375a;
+  --cardactive:#007bff;
+  --cardrecovered:#28a745;
+  --carddeceased:#6c757d;
+  
+  --vaccine-bkgrnd-color:rgba(24, 245, 17, 0.2);
+  --vaccine-text-color:rgb(42, 126, 42);
+
+  --disclaimer-txt:#e23028;
+  --disclaimer-bkgrnd:rgba(226,48,40,.06);
+  
+  --table-header-txt:#6c757d;
+  --table-header-bkgrnd:#EDEEEF;
+  --table-header-border:white;
+ 
+  --table-content-txt:#6c757d;
+  --table-content-bkgrnd:#EDEEEF;
+  --table-content-border: white;
+  --tablle-content-hov:underline solid #6c757d 3px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+  margin:0;
+  font-family: 'Poppins', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.ap102HeaderSearchBarNotifi{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items:center;
+  justify-content:center; 
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

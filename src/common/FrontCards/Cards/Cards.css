@@ -1,0 +1,40 @@
+.cc801CardContainer{
+  margin-top: 1%;
+  border-radius: 5px; 
+  height: 5rem;
+  width:10%;
+  padding:2em 1em;
+  text-align: center;
+  cursor: default;
+  font-weight:bold;
+}
+
+.cc811heading{
+  font-size:18px;
+  padding-bottom:10%;
+}
+
+.cc812content{
+  padding-bottom:8%;
+  font-size:25px;
+}
+
+.cc802carddarkgreen{
+  color:var(--cardtested);
+}
+
+.cc802cardred{
+  color:var(--cardconfirmed);
+}
+
+.cc802carddodgerblue{
+  color:var(--cardactive);
+}
+
+.cc802cardgreen{
+  color:var( --cardrecovered);
+}
+
+.cc802cardraven{
+  color:var(--carddeceased);
+}

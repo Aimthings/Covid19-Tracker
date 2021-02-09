@@ -1,0 +1,30 @@
+.nb601NotificationBox{
+  position: absolute;
+  overflow:hidden auto;
+  height:500px;
+  margin:2%;
+  padding:1%;
+  top:2em;
+  box-shadow: var(--notifi-box-shw);
+  right:0.5em;
+  z-index:1;
+  border-radius:10px;
+  background-color: var(--notifi-bkgrnd);
+}
+
+::-webkit-scrollbar {
+  background-color: var(--scroll-bar);
+  width: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thb);
+  border-radius: 16px;
+  border:var(--scroll-thb-brdr);
+}
+
+.nd602NotificationDate{
+  font-size: 20px;
+  color:var(--notifi-date);
+  font-weight: 900;
+}

@@ -1,0 +1,16 @@
+.st121DistrictNotAvailable{
+  margin: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.st132disclaimer{
+  background: var(--disclaimer-bkgrnd);
+  border-radius: 5px;
+  color: var(--disclaimer-txt);
+  padding: 1rem ;
+  text-align: center;
+  width: 16rem;
+  font-size:14px;
+  cursor:default;
+}

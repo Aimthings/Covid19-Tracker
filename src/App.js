@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+
+import './common/FontawesomeIcons';
+
+import HomePage from './views/HomePage';
+import StatePage from './views/StatePage';
+
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App = () => {
+  return (                                                                      //If url not matched redirect to homepage
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/state/:stateCode" component={StatePage} />
+        <Redirect to="/" />
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
