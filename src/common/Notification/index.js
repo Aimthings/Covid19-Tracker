@@ -9,7 +9,7 @@ import './notification.css'
 
 const Notification = ({ notifiData, OpenNote }) => {
 
-  let DatetoData = new Map();
+  let dateToData = new Map();
 
   const RearrangedData = notifiData.map(Data => {                     //Separting timestamp and data and making array of all these objects
     const EachObj = {
@@ -25,7 +25,7 @@ const Notification = ({ notifiData, OpenNote }) => {
     const date = obj[ 'timestamp' ];
     const key = date.getDate() + "" + (date.getMonth() + 1) + "" + date.getFullYear();
 
-    if (!DatetoData.has(key)) {                                     //Create map with keys (each new date)->object data
+    if (!dateToData.has(key)) {                                     //Create map with keys (each new date)->object data
 
       const value = [];
 
@@ -34,14 +34,14 @@ const Notification = ({ notifiData, OpenNote }) => {
         data: value,
         timestamp: date
       }
-      DatetoData.set(key, Object);
+      dateToData.set(key, Object);
     }
     else {
-      DatetoData.get(key)[ 'data' ].push(obj);
+      dateToData.get(key)[ 'data' ].push(obj);
     }
   }
 
-  const Toarray = Array.from(DatetoData);                             //Array [[key,value]]
+  const Toarray = Array.from(dateToData);                             //Array [[key,value]]
   const RemovedKey = [];
 
   for (let obj of Toarray)                                            //removing the key
