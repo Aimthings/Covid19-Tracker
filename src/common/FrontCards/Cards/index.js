@@ -7,13 +7,13 @@ import './Cards.css';
 
 const Cards = ({ heading, numbers, color, fontawicon }) => {
 
-  const indianformat = IndianFormat(numbers);
+  const indianFormat = IndianFormat(numbers);
 
   return (
     <div className={`cc801CardContainer cc802card${color}`}>
       <div className="cc811heading">{heading}</div>
       <div className="cc812content">
-        {indianformat}
+        {indianFormat}
       </div>
       <div>
         <FontAwesomeIcon icon={fontawicon} size="2x" />

@@ -19,7 +19,7 @@ class StatePage extends React.Component {
     recoveredCases: 0,
     deceasedCases: 0,
     vaccinated: 0,
-    Tested: 0
+    tested: 0
   };
   state = {
     stateData: [],
@@ -42,21 +42,21 @@ class StatePage extends React.Component {
         this.setState({ redirectError: true });
         return;
       }
-      const DataState = Data[ stateCode ];
-      const StateCases = DataState[ 'total' ];
-      const confirmedCases = StateCases.confirmed;
-      const recoveredCases = StateCases.recovered ? StateCases.recovered : 0;
-      const deceasedCases = StateCases.deceased ? StateCases.deceased : 0;
-      const Tested = StateCases.tested ? StateCases.tested : 0;
-      const vaccinated = StateCases.vaccinated
-      const other = StateCases.other ? StateCases.other : 0;
+      const dataState = Data[ stateCode ];
+      const stateCases = dataState[ 'total' ];
+      const confirmedCases = stateCases.confirmed;
+      const recoveredCases = stateCases.recovered ? stateCases.recovered : 0;
+      const deceasedCases = stateCases.deceased ? stateCases.deceased : 0;
+      const tested = stateCases.tested ? stateCases.tested : 0;
+      const vaccinated = stateCases.vaccinated
+      const other = stateCases.other ? stateCases.other : 0;
       const activeCases = confirmedCases - (recoveredCases + deceasedCases + other);
 
       const stateData = [];
-      for (let data in DataState[ 'districts' ]) {
+      for (let data in dataState[ 'districts' ]) {
         const Districtobjects = {
           id: data,                                        //for district id will be district name type
-          Data: DataState[ 'districts' ][ data ]
+          Data: dataState[ 'districts' ][ data ]
         }
         stateData.push(Districtobjects);
       }
@@ -67,7 +67,7 @@ class StatePage extends React.Component {
         recoveredCases,
         deceasedCases,
         vaccinated,
-        Tested
+        tested
       };
 
       setTimeout(() => {                                  //TimeOut for some delay when moving to statepage
@@ -95,7 +95,7 @@ class StatePage extends React.Component {
       <div>
         <div className="ap102HeaderSearchBarNotifi">
           <Header State={true} header={STATECODES[ stateCode ]} />
-          <FrontCards Tested={Cases[ 'Tested' ]} totalCases={Cases[ 'confirmedCases' ]} deceased={Cases[ 'deceasedCases' ]}
+          <FrontCards Tested={Cases[ 'tested' ]} totalCases={Cases[ 'confirmedCases' ]} deceased={Cases[ 'deceasedCases' ]}
             recovered={Cases[ 'recoveredCases' ]} activeCase={Cases[ 'activeCases' ]} vaccine={Cases[ 'vaccinated' ]} />
         </div>
         <div>

@@ -26,7 +26,7 @@ class Homepage extends React.Component {
     recoveredCases: 0,
     deceasedCases: 0,
     vaccinated: 0,
-    Tested: 0
+    tested: 0
   };
   fullData = []; notifiData = [];
   state = {
@@ -52,13 +52,13 @@ class Homepage extends React.Component {
         return;
       }
 
-      const DataIndia = Data[ 'TT' ][ 'total' ];               //Extract india's data from the api provided content
-      const confirmedCases = DataIndia.confirmed;
-      const recoveredCases = DataIndia.recovered;
-      const deceasedCases = DataIndia.deceased;
-      const Tested = DataIndia.tested;
-      const vaccinated = DataIndia.vaccinated;
-      const other = DataIndia.other;
+      const dataIndia = Data[ 'TT' ][ 'total' ];               //Extract india's data from the api provided content
+      const confirmedCases = dataIndia.confirmed;
+      const recoveredCases = dataIndia.recovered;
+      const deceasedCases = dataIndia.deceased;
+      const tested = dataIndia.tested;
+      const vaccinated = dataIndia.vaccinated;
+      const other = dataIndia.other;
       const activeCases = confirmedCases - (recoveredCases + deceasedCases + other);   //active cases calc includes other also present in india data
       const fullData = [];
 
@@ -79,7 +79,7 @@ class Homepage extends React.Component {
         recoveredCases,
         deceasedCases,
         vaccinated,
-        Tested
+        tested
       };
 
       this.fullData = fullData;
@@ -194,7 +194,7 @@ class Homepage extends React.Component {
 
           <Notification notifiData={notifiData} OpenNote={openNotification} />
 
-          <FrontCards Tested={Cases[ 'Tested' ]} totalCases={Cases[ 'confirmedCases' ]} deceased={Cases[ 'deceasedCases' ]}
+          <FrontCards Tested={Cases[ 'tested' ]} totalCases={Cases[ 'confirmedCases' ]} deceased={Cases[ 'deceasedCases' ]}
             recovered={Cases[ 'recoveredCases' ]} activeCase={Cases[ 'activeCases' ]} vaccine={Cases[ 'vaccinated' ]} />
 
         </div>

@@ -1,7 +1,9 @@
 import React from 'react';
 
 import './header.css';
+
 //hide covid india when state is shown
+
 const Header = ({ header, State }) => {
   return (
     <React.Fragment>
