@@ -109,7 +109,7 @@ class Homepage extends React.Component {
 
   onChange = (text) => {                                           //trigger when value changes inside searchbar input
     this.setState({ inputSearch: text });
-    this.Handlesearch(text);
+    this.Handlesearch(text);                         //camelcase change
   };
 
   Handlesearch = searchString => {
@@ -118,7 +118,7 @@ class Homepage extends React.Component {
     if (searchString.length > 0) {
       const stateNames = [ ...this.fullData ];
       const regex = new RegExp(`^${searchString}`, 'i');              //case insensitive search 'i' 
-      searchboxData = stateNames.filter(x => regex.test(x.name)).sort((a, b) => a.name.localeCompare(b.name));
+      searchboxData = stateNames.filter(obj => regex.test(obj.name)).sort((a, b) => a.name.localeCompare(b.name));
     };
 
     this.setState({ searchboxData, inputSearch: searchString });
@@ -128,13 +128,13 @@ class Homepage extends React.Component {
 
     const { searchboxData } = this.state;
 
-    if (searchboxData.length === 0)                                          //show all suggestion list according to input in dropdown
+    if (searchboxData.length === 0)                      //show all suggestion list according to input in dropdown
       return null;
     return (
       <div className="hp101suggestions">
         <ul>
           {searchboxData.map(({ id, name }) => {
-            return (                                                  //index of object with that particualr state name and then its id as URL statecode
+            return (                                     //index of object with that particualr state name and then its id as URL statecode
               <Link key={id} to={`/state/${id}`}>
                 <span  ><li onClick={() => this.suggestionSelected(name)}>{name}</li></span>
               </Link>
@@ -194,8 +194,14 @@ class Homepage extends React.Component {
 
           <Notification notifiData={notifiData} OpenNote={openNotification} />
 
-          <FrontCards Tested={cases[ 'tested' ]} totalCases={cases[ 'confirmedCases' ]} deceased={cases[ 'deceasedCases' ]}
-            recovered={cases[ 'recoveredCases' ]} activeCase={cases[ 'activeCases' ]} vaccine={cases[ 'vaccinated' ]} />
+          <FrontCards
+            Tested={cases[ 'tested' ]}
+            totalCases={cases[ 'confirmedCases' ]}
+            deceased={cases[ 'deceasedCases' ]}
+            recovered={cases[ 'recoveredCases' ]}
+            activeCase={cases[ 'activeCases' ]}
+            vaccine={cases[ 'vaccinated' ]}
+          />
 
         </div>
         <div>

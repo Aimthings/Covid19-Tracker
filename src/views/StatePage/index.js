@@ -92,7 +92,7 @@ class StatePage extends React.Component {
     const isdistrictData = stateData[ 0 ].id;
 
     return (
-      <div>
+      <React.Fragment>
         <div className="ap102HeaderSearchBarNotifi">
           <Header State={true} header={STATECODES[ stateCode ]} />
           <FrontCards Tested={Cases[ 'tested' ]} totalCases={Cases[ 'confirmedCases' ]} deceased={Cases[ 'deceasedCases' ]}
@@ -111,7 +111,7 @@ class StatePage extends React.Component {
             </div>
           }
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 
