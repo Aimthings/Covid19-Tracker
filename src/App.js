@@ -6,7 +6,6 @@ import './common/FontawesomeIcons';
 import HomePage from './views/HomePage';
 import StatePage from './views/StatePage';
 
-
 import './App.css';
 
 const App = () => {

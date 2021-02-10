@@ -165,7 +165,7 @@ class Homepage extends React.Component {
   }
   ShowItems = () => {
 
-    const Cases = this.cases;
+    const cases = this.cases;
     const fullData = this.fullData;
     const notifiData = this.notifiData;
     const { openNotification, searchboxData, inputSearch, openBell } = this.state;
@@ -194,8 +194,8 @@ class Homepage extends React.Component {
 
           <Notification notifiData={notifiData} OpenNote={openNotification} />
 
-          <FrontCards Tested={Cases[ 'tested' ]} totalCases={Cases[ 'confirmedCases' ]} deceased={Cases[ 'deceasedCases' ]}
-            recovered={Cases[ 'recoveredCases' ]} activeCase={Cases[ 'activeCases' ]} vaccine={Cases[ 'vaccinated' ]} />
+          <FrontCards Tested={cases[ 'tested' ]} totalCases={cases[ 'confirmedCases' ]} deceased={cases[ 'deceasedCases' ]}
+            recovered={cases[ 'recoveredCases' ]} activeCase={cases[ 'activeCases' ]} vaccine={cases[ 'vaccinated' ]} />
 
         </div>
         <div>
