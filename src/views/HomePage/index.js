@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { WaveLoading } from 'react-loadingg';
 import { Badge } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { connect } from 'react-redux';                              //Redux
-// import { CovidData } from '../../storage/actions';
 
 import Notification from '../../common/Notification';
 import FrontCards from '../../common/FrontCards';
@@ -22,7 +20,14 @@ import { month } from '../../utils/Helpers/FormatNumber';
 import './homePage.css';
 
 class Homepage extends React.Component {
-  cases = { confirmedCases: 0, activeCases: 0, recoveredCases: 0, deceasedCases: 0, vaccinated: 0, Tested: 0 };
+  cases = {
+    confirmedCases: 0,
+    activeCases: 0,
+    recoveredCases: 0,
+    deceasedCases: 0,
+    vaccinated: 0,
+    Tested: 0
+  };
   fullData = []; notifiData = [];
   state = {
     inputSearch: '',
@@ -36,14 +41,13 @@ class Homepage extends React.Component {
   componentDidMount() {
     this.fetchCovidData();
     this.fetchNotifyData();
-    // this.props.CovidData();
   }
 
   fetchCovidData = async () => {                                //covid data fetching
     try {
       const Data = await CheckUpdateStorageCovid();
       if (!Data) {                                              //if empty data sent make redirect to true
-        console.log("Data is not Provided By API");
+        console.error("Data is not Provided By API");
         this.setState({ redirectError: true });
         return;
       }
@@ -58,8 +62,6 @@ class Homepage extends React.Component {
       const activeCases = confirmedCases - (recoveredCases + deceasedCases + other);   //active cases calc includes other also present in india data
       const fullData = [];
 
-
-
       for (let data in Data) {
         if (data === 'TT')                 //India data already stored so no need to store
           continue;                        //Create Required Object to push into the array of objects format
@@ -71,7 +73,15 @@ class Homepage extends React.Component {
         fullData.push(stateobjects);
       }
 
-      this.cases = { confirmedCases, activeCases, recoveredCases, deceasedCases, vaccinated, Tested };
+      this.cases = {
+        confirmedCases,
+        activeCases,
+        recoveredCases,
+        deceasedCases,
+        vaccinated,
+        Tested
+      };
+
       this.fullData = fullData;
 
       this.setState({
@@ -79,8 +89,7 @@ class Homepage extends React.Component {
       });
 
     } catch (err) {                                              //if fetching fails catch the error and redirect to error page
-      console.log(err);
-      console.log('Data Fetching Error');
+      console.error('Data Fetching Error');
       this.setState({ redirectError: true });
     };
   }
@@ -94,8 +103,7 @@ class Homepage extends React.Component {
       this.notifiData = notifiData;
 
     } catch (err) {
-      console.log(err);
-      console.log('Notification Data Fetching Error');
+      console.error('Notification Data Fetching Error');
     };
   }
 
@@ -105,12 +113,14 @@ class Homepage extends React.Component {
   };
 
   Handlesearch = searchString => {
+
     let searchboxData = [];
     if (searchString.length > 0) {
       const stateNames = [ ...this.fullData ];
       const regex = new RegExp(`^${searchString}`, 'i');              //case insensitive search 'i' 
-      searchboxData = stateNames.filter(x => regex.test(x.name)).sort((a, b) => a.name.localeCompare(b.name));   //sort the statename according to the input match with the state and keep
+      searchboxData = stateNames.filter(x => regex.test(x.name)).sort((a, b) => a.name.localeCompare(b.name));
     };
+
     this.setState({ searchboxData, inputSearch: searchString });
   }
 
@@ -211,13 +221,3 @@ class Homepage extends React.Component {
 };
 
 export default Homepage;
-
-
-
-//Redux
-
-// const mapStateToProps = state => {
-//   return { covidData: state.covidData };
-// };
-
-// export default connect(mapStateToProps, { CovidData })(Homepage);          

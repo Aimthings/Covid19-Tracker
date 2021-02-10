@@ -22,12 +22,12 @@ const TabularData = props => {
     <div className="Table">
       <Link to={StatePath} className={`${isState ? "tds201TabularDataState" : "tdd201TabularDataDistrict"}`}>
         <div className="td211stateutContent">{StateDistrict}</div>
-        <div className="td212NumericalContent">{isNaN(tested) ? "Not Available" : CroreLakh(tested)}   </div>
-        <div className="td212NumericalContent">{isNaN(confirmed) ? "Not Available" : CroreLakh(confirmed)}</div>
-        <div className="td212NumericalContent">{isNaN(active) ? "Not Available" : CroreLakh(active)}   </div>
-        <div className="td212NumericalContent">{isNaN(recovered) ? "Not Available" : CroreLakh(recovered)}</div>
-        <div className="td212NumericalContent">{isNaN(deceased) ? "Not Available" : CroreLakh(deceased)} </div>
-        <div className="td212NumericalContent">{isNaN(population) ? "Not Available" : CroreLakh(population)}</div>
+        <div className="td212NumericalContent">{isNaN(tested) ? "NA" : CroreLakh(tested)}   </div>
+        <div className="td212NumericalContent">{isNaN(confirmed) ? "NA" : CroreLakh(confirmed)}</div>
+        <div className="td212NumericalContent">{isNaN(active) ? "NA" : CroreLakh(active)}   </div>
+        <div className="td212NumericalContent">{isNaN(recovered) ? "NA" : CroreLakh(recovered)}</div>
+        <div className="td212NumericalContent">{isNaN(deceased) ? "NA" : CroreLakh(deceased)} </div>
+        <div className="td212NumericalContent">{isNaN(population) ? "NA" : CroreLakh(population)}</div>
       </Link>
     </div>
   );

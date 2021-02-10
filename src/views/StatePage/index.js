@@ -13,7 +13,14 @@ import { CheckUpdateStorageCovid } from '../../utils/config/DataFetch';
 import './statePage.css';
 class StatePage extends React.Component {
 
-  cases = { confirmedCases: 0, activeCases: 0, recoveredCases: 0, deceasedCases: 0, vaccinated: 0, Tested: 0 };
+  cases = {
+    confirmedCases: 0,
+    activeCases: 0,
+    recoveredCases: 0,
+    deceasedCases: 0,
+    vaccinated: 0,
+    Tested: 0
+  };
   state = {
     stateData: [],
     dataArrived: false,
@@ -54,7 +61,14 @@ class StatePage extends React.Component {
         stateData.push(Districtobjects);
       }
 
-      this.cases = { confirmedCases, activeCases, recoveredCases, deceasedCases, vaccinated, Tested };
+      this.cases = {
+        confirmedCases,
+        activeCases,
+        recoveredCases,
+        deceasedCases,
+        vaccinated,
+        Tested
+      };
 
       setTimeout(() => {                                  //TimeOut for some delay when moving to statepage
         this.setState({
