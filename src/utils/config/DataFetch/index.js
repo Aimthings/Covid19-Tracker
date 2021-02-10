@@ -1,7 +1,7 @@
 
 import BaseUrl from '../BaseUrl';
 
-const ExpiryTimeApiTable = 60;
+const ExpiryTimeApiTable = 59;
 const ExpiryTimeApiNotification = 10;
 
 //Fetching Covid Data of Each state
