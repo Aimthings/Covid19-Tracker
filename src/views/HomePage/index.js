@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { WaveLoading } from 'react-loadingg';
 import { Badge } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { connect } from 'react-redux';                              //Redux
-// import { CovidData } from '../../storage/actions';
+import { connect } from 'react-redux';                              //Redux
+import { CovidData } from '../../storage/actions';
 
 import Notification from '../../common/Notification';
 import FrontCards from '../../common/FrontCards';
@@ -36,7 +36,7 @@ class Homepage extends React.Component {
   componentDidMount() {
     this.fetchCovidData();
     this.fetchNotifyData();
-    // this.props.CovidData();
+    this.props.CovidData();
   }
 
   fetchCovidData = async () => {                                //covid data fetching
@@ -210,14 +210,14 @@ class Homepage extends React.Component {
   }
 };
 
-export default Homepage;
+// export default Homepage;
 
 
 
 //Redux
 
-// const mapStateToProps = state => {
-//   return { covidData: state.covidData };
-// };
+const mapStateToProps = state => {
+  return { covidData: state.covidData };
+};
 
-// export default connect(mapStateToProps, { CovidData })(Homepage);          
+export default connect(mapStateToProps, { CovidData })(Homepage);          
