@@ -1,4 +1,4 @@
-# Covid19 India Tracker Application
+# Covid19 Tracker India Application Using Reactjs
 
 ![Screenshot (139)](https://user-images.githubusercontent.com/70027376/107858520-8d336600-6e5a-11eb-87d7-0446867183f2.png)
 
