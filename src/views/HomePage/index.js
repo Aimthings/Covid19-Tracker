@@ -50,7 +50,6 @@ class Homepage extends React.Component {
     this.fetchCovidData();
     this.fetchNotifyData();
   }
-
   fetchCovidData = async () => {                                //covid data fetching
     try {
       const Data = await CheckUpdateStorageCovid();
@@ -195,13 +194,27 @@ class Homepage extends React.Component {
     }
   }
 
-
+  notifiAndBell = (openBell, openNotification) => {
+    return (
+      <div className="hp111IconHeading">
+        <ThemeChanger />
+        <Header State={false} />
+        <div className="hp121Bell">
+          <Badge color="secondary" variant="dot" invisible={openBell}>
+            {openNotification ?
+              <FontAwesomeIcon onClick={this.toggleNote} icon='bell-slash' size="3x" className="i12font" /> :
+              <FontAwesomeIcon onClick={this.toggleNote} icon='bell' size="3x" className="i12font" />}
+          </Badge>
+        </div>
+      </div>
+    );
+  }
   ShowItems = () => {
 
     const cases = this.cases;
     const notifiData = this.notifiData;
     const { openNotification, searchboxData, inputSearch, openBell, isSort, fullData } = this.state;
-    const currentDate = new Date();                                                                          //Date time format 
+    const currentDate = new Date();
     const datenum = datenumeric(currentDate);
     const monthname = month(currentDate);
     const currentime = currentDate.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
@@ -209,17 +222,9 @@ class Homepage extends React.Component {
     return (
       <>
         <div className="ap102HeaderSearchBarNotifi" onClick={this.containerClick}>
-          <div className="hp111IconHeading">
-            <ThemeChanger />
-            <Header State={false} />
-            <div className="hp121Bell">
-              <Badge color="secondary" variant="dot" invisible={openBell}>
-                {openNotification ?
-                  <FontAwesomeIcon onClick={this.toggleNote} icon='bell-slash' size="3x" className="i12font" /> :
-                  <FontAwesomeIcon onClick={this.toggleNote} icon='bell' size="3x" className="i12font" />}
-              </Badge>
-            </div>
-          </div>
+
+          {this.notifiAndBell(openBell, openNotification)}
+
           <div className="hp112DateTime">{`${datenum} ${monthname}`} , {currentime} IST</div>
 
           <SearchBar

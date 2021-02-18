@@ -44,7 +44,7 @@
 }
 
 .hp121Bell{
-  cursor: pointer;
+  cursor: default;
   color:var(--notifi-bell);
   text-align: right;
   padding-left: 4.2%;
@@ -53,7 +53,11 @@
   width:50px; 
 }
 
- .hp121Bell:hover {
+.i12font{
+  cursor:pointer;
+}
+
+.i12font:hover {
   color:var(--notifi-bell-hov);
 }
 

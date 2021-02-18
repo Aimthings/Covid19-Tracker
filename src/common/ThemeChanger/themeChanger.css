@@ -2,5 +2,9 @@
     flex-grow: 1;
     padding-left: 5%;
     padding-right: 3%;
+    cursor:default;
+}
+
+.i31moon,.i31sun{
     cursor: pointer;
 }
