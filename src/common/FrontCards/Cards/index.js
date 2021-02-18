@@ -16,7 +16,7 @@ const Cards = ({ heading, numbers, color, fontawicon }) => {
         {indianFormat}
       </div>
       <div>
-        <FontAwesomeIcon icon={fontawicon} size="2x" />
+        <FontAwesomeIcon icon={fontawicon} size="2x" className="i13font" />
       </div>
     </div>
   );

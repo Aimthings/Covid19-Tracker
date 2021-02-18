@@ -1,25 +1,29 @@
 import React from 'react';
+// import FlipMove from 'react-flip-move';
 
 import { headers } from '../../utils/config/headers';
 
-import TabularData from './TabularData';
+import CovidTable from './CovidTable';
+import TableHeader from './TableHeader';
 
 import './tabular.css';
 
-const Tabular = ({ fullData, isState }) => {
+const Tabular = ({ fullData, isState, sortData, isSorted }) => {
+
   return (
-    <div>
-      <div className="hc301HeaderContainer">
-        {headers.map(header => (
-          < div className="hc311headers" key={header.id}>{`${!isState && header.id === 'st' ? 'District' : header.name}`}</div>
-        ))}
+    <div className="t01tableContainer">
+      <div className="t21table" >
+        <div onClick={sortData} className="hc301Row Heading">
+          {headers.map(({ name, id }, i) => {
+
+            const headerName = !isState && id === 'st' ? 'District' : name;
+
+            return <TableHeader key={i} headerName={headerName} id={id} isSorted={isSorted} />;
+          })}
+        </div>
+        {fullData.map((state) => <CovidTable key={state[ 'id' ]} StateDistData={state} isState={isState} />)}
       </div>
-      {
-        fullData.map((state, id) => {
-          return <TabularData key={id} StateDistData={state} isState={isState} />
-        })
-      }
-    </div >
+    </div>
   );
 }
 

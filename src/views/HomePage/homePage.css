@@ -1,6 +1,6 @@
 .hp101suggestions{
   background-color:var(--dropdown-sugg-bkgrnd-color);
-  margin-top:15px;
+  margin-top:12px;
   font-size:12px;
   width:100%;
   border-radius:2px;
@@ -47,17 +47,29 @@
   cursor: pointer;
   color:var(--notifi-bell);
   text-align: right;
-  padding-left: 0;
+  padding-left: 4.2%;
   padding-right:2%;
   flex-grow: 1; 
-  width:150px; 
+  width:50px; 
 }
 
  .hp121Bell:hover {
   color:var(--notifi-bell-hov);
 }
 
+@media screen and (max-width:769px){
+  .hp101suggestions{
+    margin-top:2px;
+  }
 
+  .i12font{
+    font-size:25px;
+  }
+
+  .hp112DateTime{
+    font-size:12px;
+  }
+}
 
 
 

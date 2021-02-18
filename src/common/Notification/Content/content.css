@@ -16,3 +16,13 @@
   font-size: 12px;
   font-weight: 900;
 }
+
+@media screen and (max-width:800px){
+  .nc501NotifiSlotContainer{
+    font-size: 10px;
+  }
+
+  .nc512TimeDiff{
+    font-size: 10px;
+  }
+}

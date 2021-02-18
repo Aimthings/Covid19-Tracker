@@ -31,14 +31,14 @@
   --dropdown-sugg-bkgrnd-hov:rgba(0,123,255,.0627451);
   --dropdown-link-color:#6c757d;
 
-  --cardtested:#3b4e2d;
+  --cardtested:#61b226;
   --cardconfirmed:#e2375a;
   --cardactive:#007bff;
   --cardrecovered:#28a745;
   --carddeceased:#6c757d;
   
-  --vaccine-bkgrnd-color:rgba(24, 245, 17, 0.2);
-  --vaccine-text-color:rgb(42, 126, 42);
+  --vaccine-bkgrnd-color:rgba(219,85,129,0.12);
+  --vaccine-text-color: #db5581;
 
   --disclaimer-txt:#e23028;
   --disclaimer-bkgrnd:rgba(226,48,40,.06);
@@ -51,11 +51,41 @@
   --table-content-bkgrnd:#EDEEEF;
   --table-content-border: white;
   --tablle-content-hov:underline solid #6c757d 3px;
+
+  --table-first-row:rgb(244, 245, 247);
+  --table-row-bkgrnd-hov:rgba(88, 99, 109, 0.6);
+  --table-row-bkgrnd:rgba(108,117,125,0.1);
+  --table-cells-txt: #6c757d;
+
+}
+
+html[data-theme='dark'] {
+  --theme-page-background: #161625;
+  --covid-color-state:#bdbdbd;
+
+  --searhbar-bkgrnd:#1e1e30;
+  --searhbar-input-txt:#bdbdbd;
+  --searhbar-input-bkgrnd:#1e1e30;
+  --searchbar-fonticon:rgba(108,117,125,0.6);
+
+  --dropdown-sugg-bkgrnd-color:#1e1e30;
+
+  --table-first-row:#1e1e30;
+
+  --notifi-content-box:rgba(108,117,125,.062);
+  --notifi-bkgrnd:#1e1e30;
+  --notifi-box-shw: 5px 5px 12px #1e1e30;
+
+  --scroll-bar:#1e1e30;
 }
 
 *{
   margin:0;
   font-family: 'Poppins', sans-serif;
+}
+
+html {
+  background: var(--theme-page-background);
 }
 
 .ap102HeaderSearchBarNotifi{
@@ -64,4 +94,3 @@
   align-items:center;
   justify-content:center; 
 }
-

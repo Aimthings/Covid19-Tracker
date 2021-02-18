@@ -31,10 +31,10 @@ export const TimeDiffNotifi = (curr, prev) => {                          //conve
 
 export const CroreLakh = number => {
   if (number >= 1000000) {
-    number = (number / 10000000).toFixed(2) + ' Cr';
+    number = (number / 10000000).toFixed(2) + 'Cr';
   }
   else if (number >= 100000)
-    number = (number / 100000).toFixed(2) + ' L';
+    number = (number / 100000).toFixed(2) + 'L';
   else
     number = IndianFormat(number);                                     //Number smaller than lakh convert into indiancomma format
   return number;

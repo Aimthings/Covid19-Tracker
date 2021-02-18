@@ -9,7 +9,7 @@ import './frontCards.css';
 
 const FrontCards = ({ Tested, totalCases, activeCase, recovered, deceased, vaccine }) => {
 
-  const vaccinedose = vaccine ? `${IndianFormat(vaccine)}  Vaccine Doses Administered` : "Not Available";
+  const vaccinedose = vaccine ? `${IndianFormat(vaccine)}  vaccine doses administered` : "Not Available";
 
   return (
     <div className="cf902CardsndFooter">
@@ -22,7 +22,7 @@ const FrontCards = ({ Tested, totalCases, activeCase, recovered, deceased, vacci
       </div>
       <div className="cf913vaccine">
         <div className="cf921icon">
-          <FontAwesomeIcon icon="syringe" size="2x" />
+          <FontAwesomeIcon icon="check-circle" size="2x" />
         </div>
         <div className="cf922vaccinetext">
           {vaccinedose}

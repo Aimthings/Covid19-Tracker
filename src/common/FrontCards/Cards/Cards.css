@@ -38,3 +38,22 @@
 .cc802cardraven{
   color:var(--carddeceased);
 }
+
+
+@media screen and (max-width:769px){
+  .cc801CardContainer{
+    margin-top: 2%;
+  }
+
+  .cc811heading{
+    font-size:10px;
+  }
+  
+  .cc812content{
+    font-size:12px;
+  }
+
+  .i13font{
+    font-size:15px;
+  }
+}

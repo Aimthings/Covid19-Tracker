@@ -8,6 +8,7 @@ import Notification from '../../common/Notification';
 import FrontCards from '../../common/FrontCards';
 import CovidTable from '../../common/Table';
 import SearchBar from '../../common/SearchBar';
+import { ThemeChanger } from '../../common/ThemeChanger';
 import Header from '../../common/Header';
 import Error from '../../common/Error';
 
@@ -15,9 +16,11 @@ import { CheckUpdateStorageCovid } from '../../utils/config/DataFetch';
 import { CheckUpdateStorageNotify } from '../../utils/config/DataFetch';
 import { STATECODES } from '../../utils/config/States';
 import { datenumeric } from '../../utils/Helpers/FormatNumber';
+import { dataSorting } from '../../utils/config/Sorting';
 import { month } from '../../utils/Helpers/FormatNumber';
 
 import './homePage.css';
+
 
 class Homepage extends React.Component {
   cases = {
@@ -28,14 +31,19 @@ class Homepage extends React.Component {
     vaccinated: 0,
     tested: 0
   };
-  fullData = []; notifiData = [];
+  notifiData = [];
   state = {
+    fullData: [],
     inputSearch: '',
     searchboxData: [],
     openBell: false,
     openNotification: false,
     redirectError: false,
-    dataArrived: false
+    dataArrived: false,
+    isSort: {
+      isAsc: true,
+      curId: 'st'
+    }
   }
 
   componentDidMount() {
@@ -82,16 +90,17 @@ class Homepage extends React.Component {
         tested
       };
 
-      this.fullData = fullData;
+
 
       this.setState({
-        dataArrived: true                                         //data successfully arrived so set to true
+        dataArrived: true,
+        fullData: fullData                                        //data successfully arrived so set to true
       });
 
     } catch (err) {                                              //if fetching fails catch the error and redirect to error page
       console.error('Data Fetching Error');
       this.setState({ redirectError: true });
-    };
+    }
   }
 
   fetchNotifyData = async () => {
@@ -104,7 +113,7 @@ class Homepage extends React.Component {
 
     } catch (err) {
       console.error('Notification Data Fetching Error');
-    };
+    }
   }
 
   onChange = (text) => {                                           //trigger when value changes inside searchbar input
@@ -114,12 +123,14 @@ class Homepage extends React.Component {
 
   Handlesearch = searchString => {
 
+    const { fullData } = this.state;
+
     let searchboxData = [];
     if (searchString.length > 0) {
-      const stateNames = [ ...this.fullData ];
+      const stateNames = [ ...fullData ];
       const regex = new RegExp(`^${searchString}`, 'i');              //case insensitive search 'i' 
       searchboxData = stateNames.filter(obj => regex.test(obj.name)).sort((a, b) => a.name.localeCompare(b.name));
-    };
+    }
 
     this.setState({ searchboxData, inputSearch: searchString });
   }
@@ -163,36 +174,65 @@ class Homepage extends React.Component {
       this.setState({ openNotification: false });
     }
   }
+
+  sortData = (event) => {
+
+    const { isSort, fullData } = this.state;
+    const tempObj = { ...isSort };
+    const id = event.target.getAttribute('id');
+
+    if (!id) return;
+
+    if (tempObj.curId === id) {
+      const arrangedData = dataSorting(id, fullData, !tempObj.isAsc);
+      tempObj.isAsc = !tempObj.isAsc;
+      this.setState({ fullData: arrangedData, isSort: tempObj });
+    }
+    else {
+      const arrangedData = dataSorting(id, fullData, tempObj.isAsc);
+      tempObj.curId = id;
+      this.setState({ fullData: arrangedData, isSort: tempObj });
+    }
+  }
+
+
   ShowItems = () => {
 
     const cases = this.cases;
-    const fullData = this.fullData;
     const notifiData = this.notifiData;
-    const { openNotification, searchboxData, inputSearch, openBell } = this.state;
+    const { openNotification, searchboxData, inputSearch, openBell, isSort, fullData } = this.state;
     const currentDate = new Date();                                                                          //Date time format 
     const datenum = datenumeric(currentDate);
     const monthname = month(currentDate);
     const currentime = currentDate.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' });
 
     return (
-      <div>
+      <>
         <div className="ap102HeaderSearchBarNotifi" onClick={this.containerClick}>
           <div className="hp111IconHeading">
+            <ThemeChanger />
             <Header State={false} />
             <div className="hp121Bell">
               <Badge color="secondary" variant="dot" invisible={openBell}>
                 {openNotification ?
-                  <FontAwesomeIcon onClick={this.toggleNote} icon='bell-slash' size="3x" /> :
-                  <FontAwesomeIcon onClick={this.toggleNote} icon='bell' size="3x" />}
+                  <FontAwesomeIcon onClick={this.toggleNote} icon='bell-slash' size="3x" className="i12font" /> :
+                  <FontAwesomeIcon onClick={this.toggleNote} icon='bell' size="3x" className="i12font" />}
               </Badge>
             </div>
           </div>
           <div className="hp112DateTime">{`${datenum} ${monthname}`} , {currentime} IST</div>
 
-          <SearchBar onChange={e => this.onChange(e.target.value)} value={inputSearch} Data={searchboxData}
-            suggested={this.renderSuggestions()} />
+          <SearchBar
+            onChange={e => this.onChange(e.target.value)}
+            value={inputSearch}
+            Data={searchboxData}
+            suggested={this.renderSuggestions()}
+          />
 
-          <Notification notifiData={notifiData} OpenNote={openNotification} />
+          <Notification
+            notifiData={notifiData}
+            OpenNote={openNotification}
+          />
 
           <FrontCards
             Tested={cases[ 'tested' ]}
@@ -204,10 +244,8 @@ class Homepage extends React.Component {
           />
 
         </div>
-        <div>
-          <CovidTable fullData={fullData} isState={true} />
-        </div>
-      </div>
+        <CovidTable fullData={fullData} isState={true} sortData={this.sortData} isSorted={isSort} />
+      </>
     );
   }
 
@@ -219,11 +257,11 @@ class Homepage extends React.Component {
       return <Error />;
     }                                                           //data not arrived loading page else show content
     return (
-      <div>
+      <>
         {dataArrived ? (this.ShowItems()) : <WaveLoading />}
-      </div>
+      </>
     );
   }
-};
+}
 
 export default Homepage;

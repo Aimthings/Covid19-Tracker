@@ -3,7 +3,6 @@ import BaseUrl from '../BaseUrl';
 
 const ExpiryTimeApiTable = 59;
 const ExpiryTimeApiNotification = 10;
-
 //Fetching Covid Data of Each state
 
 const DatafromApicovid = async () => {
@@ -21,7 +20,7 @@ export const CheckUpdateStorageCovid = async () => {
     const previoustime = JSON.parse(localStorage.getItem('Storagetime'));
     const Datenow = new Date().getMinutes();
     const dateDifference = Math.abs(Datenow - previoustime);
-    if (dateDifference < ExpiryTimeApiTable) {
+    if (dateDifference > ExpiryTimeApiTable) {
       const collectData = localStorage.getItem('Data');      //if call is before set time use already stored data and return it
       const Data = JSON.parse(collectData);
       return Data;
@@ -52,7 +51,7 @@ export const CheckUpdateStorageNotify = async () => {
     const previoustime = JSON.parse(localStorage.getItem('NotiStoragetime'));
     const Datenow = new Date().getMinutes();
     const dateDifference = Math.abs(Datenow - previoustime);
-    if (dateDifference < ExpiryTimeApiNotification) {
+    if (dateDifference > ExpiryTimeApiNotification) {
       const collectData = localStorage.getItem('NotifyData');            //if call is before set time use already stored data and return it
       const Data = JSON.parse(collectData);
       return Data;
@@ -66,7 +65,14 @@ export const CheckUpdateStorageNotify = async () => {
 }
 
 
+const htmlEl = document.getElementsByTagName('html')[ 0 ];
+const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
 
+if (currentTheme) {
+  htmlEl.dataset.theme = currentTheme;
+}
 
-
-
+export const toggleTheme = (theme) => {
+  htmlEl.dataset.theme = theme;
+  localStorage.setItem('theme', theme);
+}

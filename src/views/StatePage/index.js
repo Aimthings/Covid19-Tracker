@@ -6,11 +6,14 @@ import Header from '../../common/Header';
 import FrontCards from '../../common/FrontCards';
 import CovidTable from '../../common/Table';
 import Error from '../../common/Error';
+import Page404 from '../../common/Error/Page404';
 
 import { STATECODES } from '../../utils/config/States';
+import { dataSorting } from '../../utils/config/Sorting';
 import { CheckUpdateStorageCovid } from '../../utils/config/DataFetch';
 
 import './statePage.css';
+
 class StatePage extends React.Component {
 
   cases = {
@@ -24,7 +27,12 @@ class StatePage extends React.Component {
   state = {
     stateData: [],
     dataArrived: false,
-    redirectError: false
+    redirectError: false,
+    notFound: false,
+    isSort: {
+      isAsc: true,
+      curId: 'st'
+    }
   }
 
   componentDidMount() {
@@ -43,6 +51,7 @@ class StatePage extends React.Component {
         return;
       }
       const dataState = Data[ stateCode ];
+
       const stateCases = dataState[ 'total' ];
       const confirmedCases = stateCases.confirmed;
       const recoveredCases = stateCases.recovered ? stateCases.recovered : 0;
@@ -55,7 +64,8 @@ class StatePage extends React.Component {
       const stateData = [];
       for (let data in dataState[ 'districts' ]) {
         const Districtobjects = {
-          id: data,                                        //for district id will be district name type
+          id: data,
+          name: data,                                        //for district id will be district name type
           Data: dataState[ 'districts' ][ data ]
         }
         stateData.push(Districtobjects);
@@ -78,52 +88,79 @@ class StatePage extends React.Component {
       }, 800);
 
     } catch (err) {
-      console.log(err);
-      this.setState({ redirectError: true });
       console.log('Data Fetching failed');
-    };
+      this.setState({ notFound: true });
+    }
   }
 
   ShowItems = () => {
 
-    const Cases = this.cases;
-    const { stateData } = this.state;
+    const cases = this.cases;
+    const { stateData, isSort } = this.state;
     const { stateCode } = this.props.match.params;
     const isdistrictData = stateData[ 0 ].id;
 
     return (
-      <React.Fragment>
+      <>
         <div className="ap102HeaderSearchBarNotifi">
+
           <Header State={true} header={STATECODES[ stateCode ]} />
-          <FrontCards Tested={Cases[ 'tested' ]} totalCases={Cases[ 'confirmedCases' ]} deceased={Cases[ 'deceasedCases' ]}
-            recovered={Cases[ 'recoveredCases' ]} activeCase={Cases[ 'activeCases' ]} vaccine={Cases[ 'vaccinated' ]} />
+
+          <FrontCards
+            Tested={cases[ 'tested' ]}
+            totalCases={cases[ 'confirmedCases' ]}
+            deceased={cases[ 'deceasedCases' ]}
+            recovered={cases[ 'recoveredCases' ]}
+            activeCase={cases[ 'activeCases' ]}
+            vaccine={cases[ 'vaccinated' ]}
+          />
         </div>
         <div>
           {isdistrictData === "Unknown" ?
             <div className="st121DistrictNotAvailable">
               <div className="st132disclaimer">
                 <FontAwesomeIcon icon="exclamation-triangle" />  District-wise data not available in state bulletin
-           </div>
+            </div>
             </div>
             :
-            <div>
-              <CovidTable fullData={stateData} isState={false} />
-            </div>
+            <CovidTable fullData={stateData} isState={false} sortData={this.sortData} isSorted={isSort} />
           }
         </div>
-      </React.Fragment>
+      </>
     );
   }
 
+  sortData = (event) => {
+
+    const { isSort, stateData } = this.state;
+    const tempObj = { ...isSort };
+    const id = event.target.getAttribute('id');
+
+    if (!id) return;
+
+    if (tempObj.curId === id) {
+      const arrangedData = dataSorting(id, stateData, !tempObj.isAsc);
+      tempObj.isAsc = !tempObj.isAsc;
+      this.setState({ stateData: arrangedData, isSort: tempObj });
+    }
+    else {
+      const arrangedData = dataSorting(id, stateData, tempObj.isAsc);
+      tempObj.curId = id;
+      this.setState({ stateData: arrangedData, isSort: tempObj });
+    }
+  }
   render() {
-    const { redirectError, dataArrived } = this.state;
+    const { redirectError, dataArrived, notFound } = this.state;
     if (redirectError) {
       return <Error />;
     }
+    else if (notFound) {
+      return <Page404 />;
+    }
     return (
-      <div>
+      <>
         {dataArrived ? (this.ShowItems()) : <WaveLoading />}
-      </div>
+      </>
     );
   }
 }

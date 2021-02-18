@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSearch, faBolt, faShieldVirus, faCheckSquare, faBookDead, faSyringe } from '@fortawesome/free-solid-svg-icons';
-import { faVirus, faBellSlash, faBell, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faBolt, faShieldVirus, faCheckSquare, faBookDead, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faVirus, faBellSlash, faBell, faExclamationTriangle, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
   faSearch,
@@ -8,9 +8,11 @@ library.add(
   faShieldVirus,
   faCheckSquare,
   faBookDead,
-  faSyringe,
+  faCheckCircle,
   faVirus,
   faBellSlash,
   faBell,
-  faExclamationTriangle
+  faExclamationTriangle,
+  faAngleDown,
+  faAngleUp
 )

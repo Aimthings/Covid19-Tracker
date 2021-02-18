@@ -5,13 +5,13 @@
   align-items:center;
   justify-content:center; 
   cursor: default;
-  flex-grow:3;
+  flex-grow:2;
   text-align: right;
-  padding-left: 24.5%;
 }
 
 .h712show{
   font-size:25px;
+  color:var(--covid-color-state);
 }
 
 .h712show::after{
@@ -32,4 +32,15 @@ text-transform:uppercase;
 .h714show::before{
   content: 'COVID19 ';
   color:var(--covid-color-state);
+}
+
+@media screen and (max-width:769px){
+  .h712show{
+    font-size:20px;
+    padding-left: 10.5%;
+  }
+  
+  .h714show{
+   font-size:15px;
+  }
 }

@@ -11,16 +11,28 @@
   width: 100%;
 }
 
+.cf921icon{
+ padding-right:0.5rem;
+}
+
 .cf913vaccine{
-  margin-top:2%;
-  padding:0.2rem;
-  background-color: var(--vaccine-bkgrnd-color);
-  border-radius:5px;
-  color:var(--vaccine-text-color);
-  font-weight:bold;
-  width:23.5%;
+  align-items: center;
+  align-self: center;
+  background:var(--vaccine-bkgrnd-color);
+  border-radius: 5px;
+  color:  var(--vaccine-text-color);
   display: flex;
-  justify-content: space-evenly;
-  cursor: default;
-  height:29px;
+  margin-bottom:3rem;
+  margin-top: 2.5rem;
+  padding: 0.5rem;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+@media screen and (max-width:769px){
+  .cf913vaccine{
+    margin-bottom:3rem;
+    margin-top: 0rem;
+    font-size: 12.5px;
+  }
 }

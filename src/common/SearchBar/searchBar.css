@@ -8,6 +8,7 @@
   position: relative;
   padding-left:55px;
   padding-top:16px;
+  background-color:var(--searhbar-bkgrnd);
  }
  
  .sb401SearchBar input{
@@ -17,12 +18,30 @@
    font-size:16px ;
    border:none;
    outline:none;
+   color:var(--searhbar-input-txt);
    background-color:var(--searhbar-input-bkgrnd);
  }
   
  .sb411fontawesomeicon{
   color: var(--searchbar-fonticon);
-  left: 0.4rem;
+  left: 0.8rem;
   position: absolute;
   top: 1rem;
  }
+
+ @media screen and (max-width:740px){
+  .sb401SearchBar{
+    width:200px;
+    height:35px;  
+    padding-top:6px;
+   }
+
+ .sb401SearchBar input{
+  font-size:12px ;
+ }
+
+ .sb411fontawesomeicon{
+  top: 0.7rem;
+  left:1.2rem;
+ }
+}
