@@ -197,12 +197,16 @@ class Homepage extends React.Component {
   notifiAndBell = (openBell, openNotification) => {
     return (
       <div className="hp111IconHeading">
+
         <ThemeChanger />
+
         <Header State={false} />
+
         <div className="hp121Bell">
           <Badge color="secondary" variant="dot" invisible={openBell}>
             {openNotification ?
-              <FontAwesomeIcon onClick={this.toggleNote} icon='bell-slash' size="3x" className="i12font" /> :
+              <FontAwesomeIcon onClick={this.toggleNote} icon='bell-slash' size="3x" className="i12font" />
+              :
               <FontAwesomeIcon onClick={this.toggleNote} icon='bell' size="3x" className="i12font" />}
           </Badge>
         </div>
