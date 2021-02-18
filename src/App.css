@@ -53,7 +53,7 @@
   --tablle-content-hov:underline solid #6c757d 3px;
 
   --table-first-row:rgb(244, 245, 247);
-  --table-row-bkgrnd-hov:rgba(88, 99, 109, 0.6);
+  --table-row-bkgrnd-hov:rgba(88, 99, 109, 0.25);
   --table-row-bkgrnd:rgba(108,117,125,0.1);
   --table-cells-txt: #6c757d;
 
