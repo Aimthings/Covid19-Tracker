@@ -4,7 +4,7 @@ import { WaveLoading } from 'react-loadingg';
 import { Badge } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';                              //Redux
-import { CovidData } from '../../storage/actions';
+
 
 import Notification from '../../common/Notification';
 import FrontCards from '../../common/FrontCards';
@@ -13,15 +13,15 @@ import SearchBar from '../../common/SearchBar';
 import Header from '../../common/Header';
 import Error from '../../common/Error';
 
-import { CheckUpdateStorageCovid } from '../../utils/config/DataFetch';
-import { CheckUpdateStorageNotify } from '../../utils/config/DataFetch';
 import { STATECODES } from '../../utils/config/States';
 import { datenumeric } from '../../utils/Helpers/FormatNumber';
 import { month } from '../../utils/Helpers/FormatNumber';
 
 import './homePage.css';
 
+
 class Homepage extends React.Component {
+
   cases = { confirmedCases: 0, activeCases: 0, recoveredCases: 0, deceasedCases: 0, vaccinated: 0, Tested: 0 };
   fullData = []; notifiData = [];
   state = {
@@ -29,74 +29,47 @@ class Homepage extends React.Component {
     searchboxData: [],
     openBell: false,
     openNotification: false,
-    redirectError: false,
-    dataArrived: false
   }
 
-  componentDidMount() {
-    this.fetchCovidData();
-    this.fetchNotifyData();
-    this.props.CovidData();
-  }
 
-  fetchCovidData = async () => {                                //covid data fetching
-    try {
-      const Data = await CheckUpdateStorageCovid();
-      if (!Data) {                                              //if empty data sent make redirect to true
-        console.log("Data is not Provided By API");
-        this.setState({ redirectError: true });
-        return;
+  CovidData = (Data) => {
+
+    const DataIndia = Data[ 'TT' ][ 'total' ];               //Extract india's data from the api provided content
+    const confirmedCases = DataIndia.confirmed;
+    const recoveredCases = DataIndia.recovered;
+    const deceasedCases = DataIndia.deceased;
+    const Tested = DataIndia.tested;
+    const vaccinated = DataIndia.vaccinated;
+    const other = DataIndia.other;
+    const activeCases = confirmedCases - (recoveredCases + deceasedCases + other);   //active cases calc includes other also present in india data
+    const fullData = [];
+
+
+    for (let data in Data) {
+      if (data === 'TT')                 //India data already stored so no need to store
+        continue;                        //Create Required Object to push into the array of objects format
+      const stateobjects = {
+        id: data,
+        name: STATECODES[ data ],
+        Data: Data[ data ]
       }
+      fullData.push(stateobjects);
+    }
 
-      const DataIndia = Data[ 'TT' ][ 'total' ];               //Extract india's data from the api provided content
-      const confirmedCases = DataIndia.confirmed;
-      const recoveredCases = DataIndia.recovered;
-      const deceasedCases = DataIndia.deceased;
-      const Tested = DataIndia.tested;
-      const vaccinated = DataIndia.vaccinated;
-      const other = DataIndia.other;
-      const activeCases = confirmedCases - (recoveredCases + deceasedCases + other);   //active cases calc includes other also present in india data
-      const fullData = [];
+    this.cases = { confirmedCases, activeCases, recoveredCases, deceasedCases, vaccinated, Tested };
+    this.fullData = fullData;
 
-
-
-      for (let data in Data) {
-        if (data === 'TT')                 //India data already stored so no need to store
-          continue;                        //Create Required Object to push into the array of objects format
-        const stateobjects = {
-          id: data,
-          name: STATECODES[ data ],
-          Data: Data[ data ]
-        }
-        fullData.push(stateobjects);
-      }
-
-      this.cases = { confirmedCases, activeCases, recoveredCases, deceasedCases, vaccinated, Tested };
-      this.fullData = fullData;
-
-      this.setState({
-        dataArrived: true                                         //data successfully arrived so set to true
-      });
-
-    } catch (err) {                                              //if fetching fails catch the error and redirect to error page
-      console.log(err);
-      console.log('Data Fetching Error');
-      this.setState({ redirectError: true });
-    };
   }
 
-  fetchNotifyData = async () => {
-    try {
-      const Data = await CheckUpdateStorageNotify();
-      const notifiData = [ ...Data ];                                   //Create new notification data array
-      notifiData.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);  //Sort the array according to time stamps of each object
 
-      this.notifiData = notifiData;
+  NotifyData = (Data) => {
 
-    } catch (err) {
-      console.log(err);
-      console.log('Notification Data Fetching Error');
-    };
+
+    const notifiData = [ ...Data ];                                   //Create new notification data array
+
+    notifiData.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1);  //Sort the array according to time stamps of each object
+
+    this.notifiData = notifiData;
   }
 
   onChange = (text) => {                                           //trigger when value changes inside searchbar input
@@ -115,7 +88,6 @@ class Homepage extends React.Component {
   }
 
   renderSuggestions() {
-
     const { searchboxData } = this.state;
 
     if (searchboxData.length === 0)                                          //show all suggestion list according to input in dropdown
@@ -154,6 +126,9 @@ class Homepage extends React.Component {
     }
   }
   ShowItems = () => {
+
+    this.CovidData(this.props.covidData.list);
+    this.NotifyData(this.props.notifiData.list);
 
     const Cases = this.cases;
     const fullData = this.fullData;
@@ -197,27 +172,28 @@ class Homepage extends React.Component {
 
   render() {
 
-    const { redirectError, dataArrived } = this.state;
+    const redirectError = this.props.covidData.error || this.props.notifiData.error;
+    const loading = this.props.covidData.loading || this.props.notifiData.loading;
 
-    if (redirectError) {                                        //if redirect true show the error page
+    if (redirectError) {
       return <Error />;
     }                                                           //data not arrived loading page else show content
     return (
       <div>
-        {dataArrived ? (this.ShowItems()) : <WaveLoading />}
+        {loading ? <WaveLoading /> : (this.ShowItems())}
       </div>
     );
   }
 };
 
-// export default Homepage;
-
-
 
 //Redux
 
 const mapStateToProps = state => {
-  return { covidData: state.covidData };
+  return {
+    covidData: state.covidData,
+    notifiData: state.notifiData
+  };
 };
 
-export default connect(mapStateToProps, { CovidData })(Homepage);          
+export default connect(mapStateToProps)(Homepage);          

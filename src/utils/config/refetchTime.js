@@ -1,0 +1,2 @@
+export const TIME_CACHE_API_COVIDDATA = 15;
+export const TIME_CACHE_API_NOTIFICATION = 50;
