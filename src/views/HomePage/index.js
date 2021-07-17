@@ -64,7 +64,7 @@ class Homepage extends React.Component {
       const recoveredCases = dataIndia.recovered;
       const deceasedCases = dataIndia.deceased;
       const tested = dataIndia.tested;
-      const vaccinated = dataIndia.vaccinated;
+      const vaccinated = dataIndia.vaccinated2;
       const other = dataIndia.other;
       const activeCases = confirmedCases - (recoveredCases + deceasedCases + other);   //active cases calc includes other also present in india data
       const fullData = [];
